@@ -1,3 +1,4 @@
+import '/components/about_popup_widget.dart';
 import '/components/host_new_game_alert_widget.dart';
 import '/components/join_game_alert_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -76,9 +77,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 48.0),
                     child: Text(
                       'Lord Of The Memes',
+                      textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).displayLarge.override(
                             fontFamily: 'Piazzolla',
                             fontWeight: FontWeight.bold,
@@ -134,46 +136,98 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                   ),
                   Builder(
-                    builder: (context) => FFButtonWidget(
-                      onPressed: () async {
-                        await showAlignedDialog(
-                          context: context,
-                          isGlobal: true,
-                          avoidOverflow: false,
-                          targetAnchor: Alignment(0.0, 0.0),
-                          followerAnchor: Alignment(0.0, 0.0),
-                          builder: (dialogContext) {
-                            return Material(
-                              color: Colors.transparent,
-                              child: GestureDetector(
-                                onTap: () => FocusScope.of(context)
-                                    .requestFocus(_unfocusNode),
-                                child: JoinGameAlertWidget(),
-                              ),
-                            );
-                          },
-                        ).then((value) => setState(() {}));
-                      },
-                      text: 'Join Game',
-                      options: FFButtonOptions(
-                        width: 150.0,
-                        height: 50.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 18.0,
+                    builder: (context) => Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await showAlignedDialog(
+                            context: context,
+                            isGlobal: true,
+                            avoidOverflow: false,
+                            targetAnchor: Alignment(0.0, 0.0),
+                            followerAnchor: Alignment(0.0, 0.0),
+                            builder: (dialogContext) {
+                              return Material(
+                                color: Colors.transparent,
+                                child: GestureDetector(
+                                  onTap: () => FocusScope.of(context)
+                                      .requestFocus(_unfocusNode),
+                                  child: JoinGameAlertWidget(),
                                 ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                              );
+                            },
+                          ).then((value) => setState(() {}));
+                        },
+                        text: 'Join Game',
+                        options: FFButtonOptions(
+                          width: 150.0,
+                          height: 50.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 18.0,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
-                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                  ),
+                  Builder(
+                    builder: (context) => Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await showAlignedDialog(
+                            context: context,
+                            isGlobal: true,
+                            avoidOverflow: false,
+                            targetAnchor: Alignment(0.0, 0.0),
+                            followerAnchor: Alignment(0.0, 0.0),
+                            builder: (dialogContext) {
+                              return Material(
+                                color: Colors.transparent,
+                                child: GestureDetector(
+                                  onTap: () => FocusScope.of(context)
+                                      .requestFocus(_unfocusNode),
+                                  child: AboutPopupWidget(),
+                                ),
+                              );
+                            },
+                          ).then((value) => setState(() {}));
+                        },
+                        text: 'About',
+                        options: FFButtonOptions(
+                          width: 100.0,
+                          height: 50.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).secondary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                       ),
                     ),
                   ),

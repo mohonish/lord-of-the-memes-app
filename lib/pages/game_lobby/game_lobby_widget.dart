@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
+import '/pages/game_prompt_page/game_prompt_page_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _GameLobbyWidgetState extends State<GameLobbyWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       // poll database
       _model.pollGameSession = InstantTimer.periodic(
-        duration: Duration(milliseconds: 5000),
+        duration: Duration(milliseconds: 3000),
         callback: (timer) async {
           _model.getGameSessionResult = await GetGameSessionWithIDCall.call(
             id: 'eq.${widget.gameSessionId}',
@@ -73,34 +74,25 @@ class _GameLobbyWidgetState extends State<GameLobbyWidget> {
                   r'''$[0].current_round''',
                 ) !=
                 null) {
-              context.goNamed(
-                'GamePromptPage',
-                queryParams: {
-                  'currentPlayerId': serializeParam(
-                    widget.currentPlayerId,
-                    ParamType.String,
-                  ),
-                  'gameSessionId': serializeParam(
-                    widget.gameSessionId,
-                    ParamType.String,
-                  ),
-                  'gameRoundId': serializeParam(
-                    getJsonField(
+              await Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GamePromptPageWidget(
+                    currentPlayerId: widget.currentPlayerId!,
+                    gameSessionId: widget.gameSessionId!,
+                    gameRoundId: getJsonField(
                       (_model.getGameSessionResult?.jsonBody ?? ''),
                       r'''$[0].current_round''',
                     ).toString().toString(),
-                    ParamType.String,
-                  ),
-                  'numberOfPlayers': serializeParam(
-                    functions.getListLength((getJsonField(
+                    numberOfPlayers: functions.getListLength((getJsonField(
                       (_model.getGameSessionResult?.jsonBody ?? ''),
                       r'''$[0].joined_players''',
                     ) as List)
                         .map<String>((s) => s.toString())
-                        .toList()),
-                    ParamType.int,
+                        .toList())!,
                   ),
-                }.withoutNulls,
+                ),
+                (r) => false,
               );
             } else {
               return;
@@ -371,30 +363,25 @@ class _GameLobbyWidgetState extends State<GameLobbyWidget> {
                                           widget.gameSessionId,
                                         ),
                                       );
-
-                                      context.goNamed(
-                                        'GamePromptPage',
-                                        queryParams: {
-                                          'currentPlayerId': serializeParam(
-                                            widget.currentPlayerId,
-                                            ParamType.String,
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              GamePromptPageWidget(
+                                            currentPlayerId:
+                                                widget.currentPlayerId!,
+                                            gameSessionId:
+                                                widget.gameSessionId!,
+                                            gameRoundId:
+                                                _model.createdGameRound!.id,
+                                            numberOfPlayers: _model
+                                                .createdGameRound!
+                                                .playerIds
+                                                .length,
                                           ),
-                                          'gameSessionId': serializeParam(
-                                            widget.gameSessionId,
-                                            ParamType.String,
-                                          ),
-                                          'gameRoundId': serializeParam(
-                                            _model.createdGameRound?.id,
-                                            ParamType.String,
-                                          ),
-                                          'numberOfPlayers': serializeParam(
-                                            _model.createdGameRound?.playerIds
-                                                ?.length,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
+                                        ),
+                                        (r) => false,
                                       );
-
                                       if (_shouldSetState) setState(() {});
                                       return;
                                     } else {

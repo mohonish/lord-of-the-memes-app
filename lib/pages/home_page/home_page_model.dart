@@ -1,3 +1,4 @@
+import '/components/about_popup_widget.dart';
 import '/components/host_new_game_alert_widget.dart';
 import '/components/join_game_alert_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

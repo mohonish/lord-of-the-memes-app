@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/confirm_meme_page/confirm_meme_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -294,48 +295,28 @@ class _GamePromptPageWidgetState extends State<GamePromptPageWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed(
-                                'ConfirmMemePage',
-                                queryParams: {
-                                  'currentPlayerId': serializeParam(
-                                    widget.currentPlayerId,
-                                    ParamType.String,
-                                  ),
-                                  'gameSessionId': serializeParam(
-                                    widget.gameSessionId,
-                                    ParamType.String,
-                                  ),
-                                  'gameRoundId': serializeParam(
-                                    widget.gameRoundId,
-                                    ParamType.String,
-                                  ),
-                                  'promptText': serializeParam(
-                                    getJsonField(
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.bottomToTop,
+                                  duration: Duration(milliseconds: 300),
+                                  reverseDuration: Duration(milliseconds: 300),
+                                  child: ConfirmMemePageWidget(
+                                    currentPlayerId: widget.currentPlayerId!,
+                                    gameSessionId: widget.gameSessionId!,
+                                    gameRoundId: widget.gameRoundId!,
+                                    promptText: getJsonField(
                                       (_model.getGamePromptResult?.jsonBody ??
                                           ''),
                                       r'''$[0].title''',
                                     ).toString(),
-                                    ParamType.String,
-                                  ),
-                                  'memeUrl': serializeParam(
-                                    getJsonField(
+                                    memeUrl: getJsonField(
                                       searchResultGifsItem,
                                       r'''$.media_formats.gif.url''',
                                     ),
-                                    ParamType.String,
+                                    numberOfPlayers: widget.numberOfPlayers!,
                                   ),
-                                  'numberOfPlayers': serializeParam(
-                                    widget.numberOfPlayers,
-                                    ParamType.int,
-                                  ),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType:
-                                        PageTransitionType.bottomToTop,
-                                  ),
-                                },
+                                ),
                               );
                             },
                             child: ClipRRect(

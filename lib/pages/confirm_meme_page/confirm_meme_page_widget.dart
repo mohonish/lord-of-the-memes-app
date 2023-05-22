@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/waiting_for_page/waiting_for_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,38 +131,26 @@ class _ConfirmMemePageWidgetState extends State<ConfirmMemePageWidget> {
                                 'player_id': widget.currentPlayerId,
                                 'meme_url': widget.memeUrl,
                               });
-
-                              context.goNamed(
-                                'WaitingForPage',
-                                queryParams: {
-                                  'gameSessionId': serializeParam(
-                                    widget.gameSessionId,
-                                    ParamType.String,
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WaitingForPageWidget(
+                                    gameSessionId: widget.gameSessionId!,
+                                    gameRoundId: widget.gameRoundId!,
+                                    currentPlayerId: widget.currentPlayerId!,
+                                    numberOfPlayers: widget.numberOfPlayers!,
+                                    promptText: widget.promptText!,
                                   ),
-                                  'gameRoundId': serializeParam(
-                                    widget.gameRoundId,
-                                    ParamType.String,
-                                  ),
-                                  'currentPlayerId': serializeParam(
-                                    widget.currentPlayerId,
-                                    ParamType.String,
-                                  ),
-                                  'numberOfPlayers': serializeParam(
-                                    widget.numberOfPlayers,
-                                    ParamType.int,
-                                  ),
-                                  'promptText': serializeParam(
-                                    widget.promptText,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
+                                ),
+                                (r) => false,
                               );
                             },
                             text: 'Confirm choice',
                             options: FFButtonOptions(
+                              width: 200.0,
                               height: 50.0,
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
+                                  0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
@@ -184,7 +173,7 @@ class _ConfirmMemePageWidgetState extends State<ConfirmMemePageWidget> {
                               0.0, 0.0, 0.0, 24.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.safePop();
+                              Navigator.pop(context);
                             },
                             text: 'Go Back',
                             options: FFButtonOptions(

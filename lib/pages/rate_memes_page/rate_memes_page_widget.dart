@@ -3,6 +3,7 @@ import '/components/rate_card_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/waiting_for_results_page/waiting_for_results_page_widget.dart';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -313,30 +314,19 @@ class _RateMemesPageWidgetState extends State<RateMemesPageWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              context.goNamed(
-                                'WaitingForResultsPage',
-                                queryParams: {
-                                  'gameSessionId': serializeParam(
-                                    widget.gameSessionId,
-                                    ParamType.String,
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      WaitingForResultsPageWidget(
+                                    gameSessionId: widget.gameSessionId!,
+                                    gameRoundId: widget.gameRoundId!,
+                                    currentPlayerId: widget.currentPlayerId!,
+                                    numberOfPlayers: widget.numberOfPlayers!,
+                                    promptText: widget.promptText!,
                                   ),
-                                  'gameRoundId': serializeParam(
-                                    widget.gameRoundId,
-                                    ParamType.String,
-                                  ),
-                                  'currentPlayerId': serializeParam(
-                                    widget.currentPlayerId,
-                                    ParamType.String,
-                                  ),
-                                  'numberOfPlayers': serializeParam(
-                                    widget.numberOfPlayers,
-                                    ParamType.int,
-                                  ),
-                                  'promptText': serializeParam(
-                                    widget.promptText,
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
+                                ),
+                                (r) => false,
                               );
                             },
                             text: 'Submit Ratings',

@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/game_lobby/game_lobby_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -226,26 +227,18 @@ class _JoinGameSheetWidgetState extends State<JoinGameSheetWidget> {
                             ).toString(),
                           ),
                         );
-
-                        context.pushNamed(
-                          'GameLobby',
-                          queryParams: {
-                            'gameSessionId': serializeParam(
-                              getJsonField(
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GameLobbyWidget(
+                              gameSessionId: getJsonField(
                                 (_model.currentGameSession?.jsonBody ?? ''),
                                 r'''$[0].id''',
                               ).toString(),
-                              ParamType.String,
+                              currentPlayerId: _model.createdPlayer!.id,
+                              inviteCode: _model.codeTextFieldController.text,
                             ),
-                            'currentPlayerId': serializeParam(
-                              _model.createdPlayer?.id,
-                              ParamType.String,
-                            ),
-                            'inviteCode': serializeParam(
-                              _model.codeTextFieldController.text,
-                              ParamType.String,
-                            ),
-                          }.withoutNulls,
+                          ),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -308,7 +301,7 @@ class _JoinGameSheetWidgetState extends State<JoinGameSheetWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  context.pop();
+                  Navigator.pop(context);
                 },
                 text: 'Cancel',
                 options: FFButtonOptions(

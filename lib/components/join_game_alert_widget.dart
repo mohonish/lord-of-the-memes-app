@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/game_lobby/game_lobby_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -228,26 +229,18 @@ class _JoinGameAlertWidgetState extends State<JoinGameAlertWidget> {
                             ).toString(),
                           ),
                         );
-
-                        context.pushNamed(
-                          'GameLobby',
-                          queryParams: {
-                            'gameSessionId': serializeParam(
-                              getJsonField(
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GameLobbyWidget(
+                              gameSessionId: getJsonField(
                                 (_model.currentGameSession?.jsonBody ?? ''),
                                 r'''$[0].id''',
                               ).toString(),
-                              ParamType.String,
+                              currentPlayerId: _model.createdPlayerCopy!.id,
+                              inviteCode: _model.textController1.text,
                             ),
-                            'currentPlayerId': serializeParam(
-                              _model.createdPlayerCopy?.id,
-                              ParamType.String,
-                            ),
-                            'inviteCode': serializeParam(
-                              _model.textController1.text,
-                              ParamType.String,
-                            ),
-                          }.withoutNulls,
+                          ),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(

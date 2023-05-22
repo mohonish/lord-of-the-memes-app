@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/instant_timer.dart';
+import '/pages/rate_memes_page/rate_memes_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -65,32 +66,19 @@ class _WaitingForPageWidgetState extends State<WaitingForPageWidget> {
                   (_model.getSubmissionCountResult?.jsonBody ?? ''),
                   r'''$''',
                 )) {
-              context.goNamed(
-                'RateMemesPage',
-                queryParams: {
-                  'gameSessionId': serializeParam(
-                    widget.gameSessionId,
-                    ParamType.String,
+              await Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RateMemesPageWidget(
+                    gameSessionId: widget.gameSessionId!,
+                    gameRoundId: widget.gameRoundId!,
+                    currentPlayerId: widget.currentPlayerId!,
+                    promptText: widget.promptText!,
+                    numberOfPlayers: widget.numberOfPlayers!,
                   ),
-                  'gameRoundId': serializeParam(
-                    widget.gameRoundId,
-                    ParamType.String,
-                  ),
-                  'currentPlayerId': serializeParam(
-                    widget.currentPlayerId,
-                    ParamType.String,
-                  ),
-                  'promptText': serializeParam(
-                    widget.promptText,
-                    ParamType.String,
-                  ),
-                  'numberOfPlayers': serializeParam(
-                    widget.numberOfPlayers,
-                    ParamType.int,
-                  ),
-                }.withoutNulls,
+                ),
+                (r) => false,
               );
-
               return;
             } else {
               return;
