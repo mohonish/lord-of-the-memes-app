@@ -24,7 +24,6 @@ The first four years of my career were spent in app development. Since then, I h
 ## Process
 
 My first roadblock was when I realized that Supabase realtime does not work out of the box on FlutterFlow. I enquired on the supabase discord server and I was disappointed to be confirmed about that limitation. There existed workarounds but most of them required me to write code.
-TODO: add screenshot.
 
 So as a workaround, I decided to leverage `Periodic Actions` in FlutterFlow, to poll a backend API every x seconds. I used this to drive the real-time or interactive features of the app. For example, updates on the Lobby page, being moved to the game page when the host starts the game, etc.
 
