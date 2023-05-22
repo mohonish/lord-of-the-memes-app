@@ -1,6 +1,6 @@
 # Lord Of The Memes
 
-Lord of the Memes is a fun interactive game to be played with friends reacting to various situations with meme gifs.
+Lord of the Memes is a fun interactive game to be played with friends where you have to react to various situations with meme gifs, and compete to be crowned as the ultimate Meme Lord.
 
 ## Demo
 
@@ -14,7 +14,8 @@ No instructions required. Please refer to the demo video for an example gameplay
 
 I built this solo.  
 Github: https://github.com/mohonish/  
-Twitter: https://twitter.com/mohonishc
+Twitter: https://twitter.com/mohonishc  
+LinkedIn: https://www.linkedin.com/in/mohonish/
 
 ## Motivation
 
